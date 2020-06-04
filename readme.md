@@ -1,5 +1,13 @@
 **特别声明：本项目中的展示图片归喜茶所有。**
 
+### 源码地址
+
+github地址: [https://github.com/tinypuppet/heytea](https://github.com/tinypuppet/heytea)
+
+gitee地址：[https://gitee.com/tinypuppet/heytea](https://gitee.com/tinypuppet/heytea)
+
+uni-app插件市场地址：[https://ext.dcloud.net.cn/plugin?id=1957](https://ext.dcloud.net.cn/plugin?id=1957)
+
 ### 简介
 
 uniapp开发的一套仿喜茶GO小程序的前端模板（weapp + H5）（持续更新）。
