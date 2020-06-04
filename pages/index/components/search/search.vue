@@ -132,7 +132,7 @@
 						}
 					})
 				})
-				setTimeout(() => this.result = result, 500)
+				setTimeout(() => this.result = result, 300)
 			},
 			clear() {
 				this.keyword=''
