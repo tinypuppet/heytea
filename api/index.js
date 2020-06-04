@@ -8,6 +8,8 @@ import notices from './notices.js'
 import productDetail from './productDetail.js'
 import scores from './scores.js'
 import martDetail from './martDetail.js'
+import hotSearch from './hotSearch.js'
+import historySearch from './historySearch.js'
 
 const json = {
 	categories,
@@ -19,7 +21,9 @@ const json = {
 	notices,
 	productDetail,
 	scores,
-	martDetail
+	martDetail,
+	hotSearch,
+	historySearch
 }
 
 export default (name, loading = true) => {

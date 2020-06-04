@@ -3,7 +3,7 @@
 		<view class="header">
 			<!-- 搜索栏 begin -->
 			<view class="search-box">
-				<view class="search-input">
+				<view class="search-input" @tap="showSearch=true">
 					<image src="/static/images/common/search-icon.png" class="search-icon"></image>
 					<view>搜索</view>
 				</view>
@@ -132,6 +132,7 @@
 				  @pay="pay"
 		/>
 		<!-- 购物车栏 end -->
+		<search :show="showSearch" :categories="categories" @hide="showSearch=false" @choose="showProductDetailModal"></search>
 	</view>
 </template>
 
@@ -141,13 +142,15 @@
 	import CartBar from './components/cartbar/cartbar.vue'
 	import ProductModal from './components/product-modal/product-modal.vue'
 	import cartPopup from './components/cart-popup/cart-popup.vue'
+	import Search from './components/search/search.vue'
 	
 	export default {
 		components: {
 			Actions,
 			CartBar,
 			ProductModal,
-			cartPopup
+			cartPopup,
+			Search
 		},
 		data() {
 			return {
@@ -170,7 +173,8 @@
 				],
 				productModalVisible: false,
 				cartPopupShow: false,
-				productsScrollTop: 0
+				productsScrollTop: 0,
+				showSearch: false
 			}
 		},
 		computed: {
