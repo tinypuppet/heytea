@@ -132,7 +132,7 @@
 		top: 50%;
 		margin: auto;
 		background: #fff;
-		z-index: 1011;
+		z-index: 1000;
 		transition: all 0.3s ease-in-out;
 		opacity: 0;
 		box-sizing: border-box;
@@ -159,7 +159,7 @@
 		right: 0;
 		bottom: 0;
 		background: rgba(0, 0, 0, 0.6);
-		z-index: 1010;
+		z-index: 999;
 		transition: all 0.3s ease-in-out;
 		opacity: 0;
 		visibility: hidden;

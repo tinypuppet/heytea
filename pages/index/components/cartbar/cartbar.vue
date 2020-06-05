@@ -47,7 +47,7 @@ export default {
 				'bottom': 'var(--window-bottom)',
 				// #endif
 				'width': '100%',
-				'z-index': '999',
+				'z-index': '995',
 				'height': '100rpx',
 				'background-color': '#f0f0f1',
 				'border-bottom': '2rpx solid #c8c7cc',
