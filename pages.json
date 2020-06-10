@@ -102,6 +102,10 @@
 				"navigationBarTitleText": "企业团餐"
 			}
         }
+        ,{
+            "path" : "pages/order/detail",
+            "style" : {}
+        }
     ],
 	"tabBar": {
 		"color": "#999999",

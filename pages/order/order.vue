@@ -42,7 +42,7 @@
 							<scroll-view scroll-y="true" class="orders-scroll">
 								<view class="wrapper">
 									<view class="order-list">
-										<view class="order" v-for="(order, index) in orders" :key="index">
+										<navigator class="order" v-for="(order, index) in orders" :key="index" open-type="navigate" :url="'/pages/order/detail?id=' + order.id">
 											<view class="header">
 												<view class="flex-fill font-size-medium">{{ order.shop.name }}</view>
 												<view class="status">
@@ -69,7 +69,7 @@
 												<button type="default" hover-class="none">查看评论</button>
 												<button type="primary" plain hover-class="none">再来一单</button>
 											</view>
-										</view>
+										</navigator>
 									</view>
 								</view>
 							</scroll-view>

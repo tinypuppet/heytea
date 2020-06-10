@@ -231,6 +231,10 @@ uni-modal .uni-modal {
 	font-size: $font-size-base;
 }
 
+.font-size-extra-sm {
+	font-size: $font-size-extra-sm;
+}
+
 .font-size-sm {
 	font-size: $font-size-sm;
 }
@@ -461,8 +465,16 @@ uni-modal .uni-modal {
 	margin-bottom: 50rpx;
 }
 
+.mt-20 {
+	margin-top: 20rpx;
+}
+
 .mt-30 {
 	margin-top: 30rpx;
+}
+
+.mt-40 {
+	margin-top: 40rpx;
 }
 
 .ml-10 {
