@@ -114,6 +114,10 @@
 				"navigationBarTitleText": "填写备注"
 			}
         }
+        ,{
+            "path" : "pages/gifts/gifts",
+            "style" : {}
+        }
     ],
 	"tabBar": {
 		"color": "#999999",
