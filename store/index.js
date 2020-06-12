@@ -20,7 +20,8 @@ const store = new Vuex.Store({
 			"longitude": "",
 			"is_default": 1
 		}],
-		address: {}
+		address: {},
+		remark: '不打包'
 	},
 	mutations: {
 		SET_ORDER_TYPE(state, orderType) {
@@ -28,6 +29,9 @@ const store = new Vuex.Store({
 		},
 		SET_ADDRESS(state, address) {
 			state.address = address
+		},
+		SET_REMARK(state, remark) {
+			state.remark = remark
 		}
 	}
 })

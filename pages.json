@@ -108,6 +108,12 @@
 				"navigationBarTitleText": "订单详情"
 			}
         }
+        ,{
+            "path" : "pages/pay/remark",
+            "style" : {
+				"navigationBarTitleText": "填写备注"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#999999",

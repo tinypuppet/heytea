@@ -33,9 +33,9 @@
 				</view>
 			</list-cell>
 			<list-cell arrow last>
-				<view class="w-100 d-flex align-items-center justify-content-between">
-					<view>备注</view>
-					<view>无接触配送，打包</view>
+				<view class="w-100 d-flex align-items-center justify-content-between overflow-hidden">
+					<view class="flex-shrink-0">备注</view>
+					<navigator hover-class="none" class="flex-fill ml-40 text-truncate text-right" open-type="navigate" url="/pages/pay/remark">{{ remark }}</navigator>
 				</view>
 			</list-cell>
 			<list-cell last>
@@ -72,7 +72,7 @@
 		},
 		data() {
 			return {
-				cart: uni.getStorageSync('cart')
+				cart: uni.getStorageSync('cart'),
 			}
 		},
 		computed: {
@@ -81,6 +81,9 @@
 			},
 			cartAmount() {
 				return this.cart.reduce((acc, cur) => acc + cur.number * cur.price, 0)
+			},
+			remark() {
+				return this.$store.state.remark
 			}
 		}
 	}
