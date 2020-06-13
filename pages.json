@@ -116,7 +116,9 @@
         }
         ,{
             "path" : "pages/gifts/gifts",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "阿喜有礼"
+			}
         }
     ],
 	"tabBar": {

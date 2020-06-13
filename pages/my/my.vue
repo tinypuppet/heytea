@@ -32,16 +32,16 @@
 						<view class="value">0</view>
 						<view class="title">喜茶劵</view>
 					</view>
-					<navigator class="grid" open-type="navigate"  url="/pages/my/wallet">
+					<navigator class="grid" open-type="navigate" url="/pages/my/wallet">
 						<image src="/static/images/my/me_icon_wallet.png"></image>
 						<view class="value">0.00</view>
 						<view class="title">钱包</view>
 					</navigator>
-					<view class="grid" hover-class="opacity-6">
+					<navigator class="grid" open-type="navigate" url="/pages/gifts/gifts">
 						<image src="/static/images/my/me_icon_gift_card.png"></image>
 						<view class="value">0</view>
 						<view class="title">阿喜有礼</view>
-					</view>
+					</navigator>
 				</view>
 			</view>
 			<!-- member card end -->

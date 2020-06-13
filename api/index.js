@@ -11,6 +11,7 @@ import martDetail from './martDetail.js'
 import hotSearch from './hotSearch.js'
 import historySearch from './historySearch.js'
 import orderDetail from './orderDetail.js'
+import giftCards from './giftCards.js'
 
 const json = {
 	categories,
@@ -25,7 +26,8 @@ const json = {
 	martDetail,
 	hotSearch,
 	historySearch,
-	orderDetail
+	orderDetail,
+	giftCards
 }
 
 export default (name, loading = true) => {

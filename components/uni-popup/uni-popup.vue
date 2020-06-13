@@ -181,7 +181,7 @@
 					'right': 0,
 					'bottom': 0,
 					//#ifdef H5
-					'bottom': '50px',
+					'bottom': 'var(--window-bottom)',
 					//#endif
 				}
 			},
