@@ -8,7 +8,8 @@
 	}, {
 		"path": "pages/order/order",
 		"style": {
-			"navigationStyle": "custom"
+			"navigationStyle": "custom",
+			"disableScroll": true
 		}
 	}, {
 		"path": "pages/my/my",
@@ -65,62 +66,56 @@
 			"navigationBarTitleText": "积分明细",
 			"disableScroll": true
 		}
-	}    ,{
-            "path" : "pages/my/member",
-            "style" : {
-				"navigationBarTitleText": "开通星球会员",
-				"navigationBarBackgroundColor": "#f6f6f6"
-			}
-        }
-        ,{
-            "path" : "pages/addresses/addresses",
-            "style" : {
-				"navigationBarTitleText": "收货地址"
-			}
-        }
-        ,{
-            "path" : "pages/addresses/add",
-            "style" : {
-				"navigationBarTitleText": "添加地址"
-			}
-        }
-        ,{
-            "path" : "pages/pay/pay",
-            "style" : {
-				"navigationBarTitleText": "订单结算"
-			}
-        }
-        ,{
-            "path" : "pages/mart/detail",
-            "style" : {
-				"navigationBarTitleText": "商品详情"
-			}
-        }
-        ,{
-            "path" : "pages/home/group-dinner",
-            "style" : {
-				"navigationBarTitleText": "企业团餐"
-			}
-        }
-        ,{
-            "path" : "pages/order/detail",
-            "style" : {
-				"navigationBarTitleText": "订单详情"
-			}
-        }
-        ,{
-            "path" : "pages/pay/remark",
-            "style" : {
-				"navigationBarTitleText": "填写备注"
-			}
-        }
-        ,{
-            "path" : "pages/gifts/gifts",
-            "style" : {
-				"navigationBarTitleText": "阿喜有礼"
-			}
-        }
-    ],
+	}, {
+		"path": "pages/my/member",
+		"style": {
+			"navigationBarTitleText": "开通星球会员",
+			"navigationBarBackgroundColor": "#f6f6f6"
+		}
+	}, {
+		"path": "pages/addresses/addresses",
+		"style": {
+			"navigationBarTitleText": "收货地址"
+		}
+	}, {
+		"path": "pages/addresses/add",
+		"style": {
+			"navigationBarTitleText": "添加地址"
+		}
+	}, {
+		"path": "pages/pay/pay",
+		"style": {
+			"navigationBarTitleText": "订单结算"
+		}
+	}, {
+		"path": "pages/mart/detail",
+		"style": {
+			"navigationBarTitleText": "商品详情"
+		}
+	}, {
+		"path": "pages/home/group-dinner",
+		"style": {
+			"navigationBarTitleText": "企业团餐"
+		}
+	}, {
+		"path": "pages/order/detail",
+		"style": {
+			"navigationBarTitleText": "订单详情"
+		}
+	}, {
+		"path": "pages/pay/remark",
+		"style": {
+			"navigationBarTitleText": "填写备注"
+		}
+	}, {
+		"path": "pages/gifts/gifts",
+		"style": {
+			"navigationBarTitleText": "阿喜有礼"
+		}
+	}, {
+		"path": "pages/my/benefits",
+		"style": {}
+	}],
 	"tabBar": {
 		"color": "#999999",
 		"selectedColor": "#343434",
