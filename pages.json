@@ -114,7 +114,14 @@
 		}
 	}, {
 		"path": "pages/my/benefits",
-		"style": {}
+		"style": {
+			"navigationBarTitleText": "会员权益"
+		}
+	}, {
+		"path": "pages/my/member-benefit",
+		"style": {
+			"navigationBarTitleText": "星球会员权益"
+		}
 	}],
 	"tabBar": {
 		"color": "#999999",

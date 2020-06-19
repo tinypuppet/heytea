@@ -10,7 +10,7 @@
 			<view class="member-card">
 				<view class="info">
 					<view class="title">
-						<view class="wenyue-font">GO会员</view>
+						<navigator class="wenyue-font" open-type="navigate" url="/pages/my/benefits">GO会员</navigator>
 						<view class="tips" @tap="openMember">
 							<view>成为星球会员享双倍积分</view>
 							<image src="/static/images/my/icon_arrow.png"></image>
