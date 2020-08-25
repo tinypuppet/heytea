@@ -84,6 +84,11 @@ button {
 	}
 }
 
+.button-hover[type='primary'][plain] {
+	border: 2rpx solid rgba($color: $color-primary, $alpha: 0.6);
+	color: rgba($color: $color-primary, $alpha: 0.6);
+}
+
 uni-toast {
 	z-index: 9999;
 }
@@ -533,8 +538,16 @@ uni-modal .uni-modal {
 	padding-top: 30rpx;
 }
 
+.pt-40 {
+	padding-top: 40rpx;
+}
+
 .pb-30 {
 	padding-bottom: 30rpx;
+}
+
+.pb-40 {
+	padding-bottom: 40rpx;
 }
 
 .p-20 {
