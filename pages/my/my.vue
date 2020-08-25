@@ -2,8 +2,8 @@
 	<view class="container">
 		<image class="w-100" src="https://go.cdn.heytea.com/storage/products/2019/12/18/01954797f3fb470cb6ba1606476c658c.png" mode="widthFix"></image>
 		<view class="content">
-			<view class="welcome">
-				<view>你好 tinypuppet</view>
+			<view class="welcome" @tap="openLoginPopup">
+				<view>你好 {{ isLogin ? userInfo.nickName : '立即登录开启喜茶星球之旅' }}</view>
 				<view class="font-size-base">灵感之茶，中国制造</view>
 			</view>
 			<!-- member card begin -->
@@ -158,25 +158,39 @@
 				<view view="title">更多</view>
 			</view>
 		</list-cell>
+		<!-- 登录popup -->
+		<login-popup ref="loginPopup"></login-popup>
 	</view>
 </template>
 
 <script>
 	import listCell from '@/components/list-cell/list-cell.vue'
+	import loginPopup from './components/login-popup.vue'
+	import { mapState } from 'vuex'
 	
 	export default {
 		components: {
-			listCell
+			listCell,
+			loginPopup
 		},
 		data() {
 			return {
 				boardcast: []
 			}
 		},
+		computed: {
+			...mapState(['isLogin', 'userInfo'])
+		},
 		async onLoad() {
 			this.boardcast = await this.$api('boardcast')
 		},
 		methods: {
+			openLoginPopup() {
+				if(this.isLogin) {
+					return
+				}
+				this.$refs['loginPopup'].open()
+			},
 			info() {
 				uni.navigateTo({
 					url: '/pages/my/info'

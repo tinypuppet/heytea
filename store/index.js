@@ -6,6 +6,8 @@ Vue.use(Vuex)
 //为了方便测试，此处用vuex做全局数据
 const store = new Vuex.Store({
 	state: {
+		userInfo: {},
+		isLogin: false,
 		orderType: 'takein',
 		addresses: [{
 			"id": 1,
@@ -32,6 +34,12 @@ const store = new Vuex.Store({
 		},
 		SET_REMARK(state, remark) {
 			state.remark = remark
+		},
+		SET_USERINFO(state, userInfo) {
+			state.userInfo = userInfo
+		},
+		SET_ISLOGIN(state, isLogin) {
+			state.isLogin = isLogin
 		}
 	}
 })
