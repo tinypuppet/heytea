@@ -2,7 +2,7 @@
 	<view class="container">
 		<view class="section">
 			<view class="d-flex justify-content-between align-items-center pt-40 pb-40">
-				<view class="font-size-extra-lg">tinypuppet</view>
+				<view class="font-size-extra-lg">{{ userInfo.nickName }}</view>
 				<button type="primary" plain class="member-btn" @tap="member">登录喜茶星球</button>
 			</view>
 			<view class="experience-card">
@@ -60,10 +60,14 @@
 
 <script>
 	import listCell from '@/components/list-cell/list-cell.vue'
+	import { mapState } from 'vuex'
 	
 	export default {
 		components: {
 			listCell
+		},
+		computed: {
+			...mapState(['userInfo'])
 		},
 		data() {
 			return {
@@ -88,9 +92,9 @@
 				})
 			},
 			memberBenefit() {
-				uni.navigateTo({
-					url: '/pages/my/member-benefit'
-				})
+				// uni.navigateTo({
+				// 	url: '/pages/my/member-benefit'
+				// })
 			}
 		}
 	}

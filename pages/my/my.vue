@@ -10,7 +10,7 @@
 			<view class="member-card">
 				<view class="info">
 					<view class="title">
-						<navigator class="wenyue-font" open-type="navigate" url="/pages/my/benefits">GO会员</navigator>
+						<view class="wenyue-font" @tap="openBenefits">GO会员</view>
 						<view class="tips" @tap="openMember">
 							<view>成为星球会员享双倍积分</view>
 							<image src="/static/images/my/icon_arrow.png"></image>
@@ -210,6 +210,15 @@
 				uni.navigateTo({
 					url: '/pages/my/code'
 				})
+			},
+			openBenefits() {
+				if(this.isLogin) {
+					uni.navigateTo({
+						url: '/pages/my/benefits'
+					})
+				} else {
+					this.$refs['loginPopup'].open()
+				}
 			}
 		}
 	}
