@@ -60,7 +60,8 @@
         "appid" : "",
         "setting" : {
             "urlCheck" : false,
-            "minified" : true
+            "minified" : true,
+            "es6" : false
         },
         "usingComponents" : true,
         "permission" : {}

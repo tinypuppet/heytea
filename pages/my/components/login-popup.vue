@@ -45,8 +45,13 @@
 				this.$emit('change', show)
 			},
 			getUserInfo(e) {
+				//请配置AppID，否则获取失败
 				if(e.target.errMsg !== 'getUserInfo:ok') {
-					this.$alert('您已取消了授权，请重新授权登录')
+					uni.showModal({
+						title: '提示',
+						content: '您已取消了授权，请重新授权登录',
+						showCancel: false
+					})
 					return
 				}
 				this.SET_USERINFO(e.target.userInfo)
