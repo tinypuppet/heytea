@@ -14,22 +14,18 @@
 					<view class="title">
 						<image :src="orderType == 'takein' ? 
 								'/static/images/common/star_normal.png' : 
-								'/static/images/order/order_icon_address.png'" 
-								class="left-icon" />
+								'/static/images/order/order_icon_address.png'"
+						 class="left-icon" />
 						<!-- 为了测试方便，这里使用静态店铺数据 -->
 						<view class="address">{{ orderType == 'takeout' ? address.complete_address : '中心城店' }}</view>
 						<image src="/static/images/common/black_arrow_right.png" class="right-icon"></image>
 					</view>
 					<!-- 外卖&自取switch begin -->
 					<view class="buttons">
-						<button type="default" class="button" 
-								:class="{active: orderType == 'takein'}" plain 
-								hover-class="none" @tap="switchOrderType">
+						<button type="default" class="button" :class="{active: orderType == 'takein'}" plain hover-class="none" @tap="switchOrderType">
 							自取
 						</button>
-						<button type="default" class="button" 
-								:class="{active: orderType == 'takeout'}" plain 
-								hover-class="none" @tap="switchOrderType">
+						<button type="default" class="button" :class="{active: orderType == 'takeout'}" plain hover-class="none" @tap="switchOrderType">
 							外卖
 						</button>
 					</view>
@@ -56,18 +52,18 @@
 		<!-- 滚动公告栏 end -->
 		<view class="main">
 			<!-- 左侧菜单 begin -->
-			<scroll-view class="menu-bar" scroll-y scroll-with-animation>
+			<scroll-view scroll-anchoring class="menu-bar" :scroll-top="menuWrapperScrollTop" scroll-y scroll-with-animation>
 				<view class="wrapper">
-					<view class="menu-item" @tap="handleMenuSelected(category.id)" 
-						  :class="{active: currentCategoryId == category.id}" v-for="(category, index) in categories" :key="index">
-						<image :src="category.category_image_url" class="image" mode="widthFix"></image>
+					<view class="menu-item" @tap="handleMenuSelected(category.id)" :class="{active: currentCategoryId == category.id}"
+					 v-for="(category, index) in categories" :key="index" :id="`anchor-${category.id}`">
+						<image lazy-load :src="category.category_image_url" class="image" mode="widthFix"></image>
 						<view class="title">{{ category.name }}</view>
 					</view>
 				</view>
 			</scroll-view>
 			<!-- 左侧菜单 end -->
 			<!-- 右侧商品列表 begin -->
-			<scroll-view class="product-section" scroll-y scroll-with-animation :scroll-top="productsScrollTop" @scroll="productsScroll">
+			<scroll-view scroll-anchoring class="product-section" scroll-y scroll-with-animation :scroll-into-view="scrollToId">
 				<view class="wrapper">
 					<view id="ads">
 						<!-- 广告栏1 begin -->
@@ -91,7 +87,7 @@
 						<view class="products">
 							<view class="product" v-for="(product, key) in category.products" :key="key" 
 								@tap="showProductDetailModal(product)">
-								<image :src="product.images[0].url" mode="widthFix" class="image"></image>
+								<image lazy-load :src="product.images[0].url" mode="widthFix" class="image"></image>
 								<view class="content">
 									<view class="name">{{ product.name }}</view>
 									<view class="labels">
@@ -154,6 +150,7 @@
 		},
 		data() {
 			return {
+				scrollToId: 'abc',
 				categories: [],
 				cart: [],
 				product: {},
@@ -173,31 +170,40 @@
 				],
 				productModalVisible: false,
 				cartPopupShow: false,
-				productsScrollTop: 0,
-				showSearch: false
+				showSearch: false,
+				menuWrapperScrollTop: 0
 			}
 		},
 		computed: {
 			...mapState(['orderType', 'address']),
-			productCartNum() {	//计算单个饮品添加到购物车的数量
+			productCartNum() { //计算单个饮品添加到购物车的数量
 				return id => this.cart.reduce((acc, cur) => {
-						if(cur.id === id) {
-							return acc += cur.number
-						}
-						return acc
-					}, 0)
+					if (cur.id === id) {
+						return acc += cur.number
+					}
+					return acc
+				}, 0)
 			}
 		},
 		async onLoad() {
 			this.notices = await this.$api('notices')
 			this.categories = await this.$api('categories')
 			this.currentCategoryId = this.categories.length && this.categories[0].id
-			this.$nextTick(() => this.calcSize())
+			this.$nextTick(() => {this.calcSize()})
+		},
+		mounted() {
+			const queryMenu = uni.createSelectorQuery().in(this)
+			queryMenu.select('.menu-bar').boundingClientRect(data => {
+				this.viewportSize = data.height
+			}).exec()
+		},
+		onHide() {
+			this.scrollTimer && clearTimeout(this.scrollTimer)
 		},
 		methods: {
 			...mapMutations(['SET_ORDER_TYPE']),
 			switchOrderType() {
-				if(this.orderType === 'takein') {
+				if (this.orderType === 'takein') {
 					uni.navigateTo({
 						url: '/pages/addresses/addresses'
 					})
@@ -205,20 +211,20 @@
 					this.SET_ORDER_TYPE('takein')
 				}
 			},
-			handleAddToCart(product) {	//添加到购物车
+			handleAddToCart(product) { //添加到购物车
 				const index = this.cart.findIndex(item => {
-					if(!product.is_single) {
+					if (!product.is_single) {
 						return (item.id == product.id) && (item.materials_text == product.materials_text)
 					} else {
 						return item.id === product.id
 					}
 				})
-				
-				if(index > -1) {
+
+				if (index > -1) {
 					this.cart[index].number += (product.number || 1)
 					return
 				}
-				
+
 				this.cart.push({
 					id: product.id,
 					cate_id: product.category_id,
@@ -232,13 +238,13 @@
 			},
 			handleMinusFromCart(product) { //从购物车减商品
 				let index
-				if(product.is_single) {
-				   index = this.cart.findIndex(item => item.id == product.id)
+				if (product.is_single) {
+					index = this.cart.findIndex(item => item.id == product.id)
 				} else {
-				   index = this.cart.findIndex(item => (item.id == product.id) && (item.materials_text == product.materials_text))
+					index = this.cart.findIndex(item => (item.id == product.id) && (item.materials_text == product.materials_text))
 				}
 				this.cart[index].number -= 1
-				if(this.cart[index].number <= 0) {
+				if (this.cart[index].number <= 0) {
 					this.cart.splice(index, 1)
 				}
 			},
@@ -261,15 +267,28 @@
 				this.cart = []
 			},
 			handleMenuSelected(id) {
-				this.productsScrollTop = this.categories.find(item => item.id == id).top
-				this.$nextTick(() => this.currentCategoryId = id)
-			},
-			productsScroll({detail}) {
-				const {scrollTop} = detail
-				let tabs = this.categories.filter(item=> item.top <= scrollTop).reverse()
-				if(tabs.length > 0){
-					this.currentCategoryId = tabs[0].id
+				this._calculateScrollMenuTop(id)
+				if (this.scrollToId == `products-${id}`) {
+					this.scrollToId = ''
 				}
+				this.$nextTick(() => {
+					this.scrollToId = `products-${id}`
+					this.currentCategoryId = id
+				})
+			},
+			_calculateScrollMenuTop(id) {
+				if (!this.viewportSize || !this.scrollerSize) return
+				if (this.scrollToId == `products-${id}`) return
+				const minTranslate = Math.min(0, this.viewportSize - this.scrollerSize)
+				const middleTranslate = this.viewportSize / 2
+				const ArchItemHeight = 72
+				
+				let currentArchor = this.categories.find(item => item.id === id)
+				let size = currentArchor.menuItemTop + ArchItemHeight / 2 || 0
+				let translate = middleTranslate - size
+				
+				translate = Math.max(minTranslate, Math.min(0, translate))
+				this.menuWrapperScrollTop = translate < 0 ? Math.abs(translate) : translate
 			},
 			calcSize() {
 				let h = 0
@@ -279,9 +298,11 @@
 				}, data => {
 					h += Math.floor(data.height)
 				}).exec()
-				
-				this.categories.forEach(item => {
-					let view = uni.createSelectorQuery().select(`#products-${item.id}`)
+
+				this.categories.forEach((item, index) => {
+					let view = uni.createSelectorQuery().select(`#products-${item.id}`)  // 获取右侧商品列表节点
+					let viewMenu = uni.createSelectorQuery().select(`#anchor-${item.id}`) // 获取左侧menubar节点
+
 					view.fields({
 						size: true
 					}, data => {
@@ -289,6 +310,47 @@
 						h += Math.floor(data.height)
 						item.bottom = h
 					}).exec()
+
+					viewMenu.boundingClientRect(data => {
+						item.menuItemTop = data.top
+						if (index > 0) {
+							item.menuItemTop = data.top - this.categories[0].menuItemTop
+						}
+						if (index === this.categories.length - 1) {
+							this.scrollerSize = data.bottom - this.categories[0].menuItemTop
+							this.categories[0].menuItemTop = 0
+						}
+					}).exec()
+					
+					this.useObserverWatcher(item.id)
+				})
+			},
+			/**
+			 * ------------------------------------------------------
+			 * 监听商品列表分类的相交状态
+			 * @param {String} id 选择器id
+			 * @pubic
+			 * @return void  
+			 * -------------------------------------------------------
+			 * */
+			useObserverWatcher(id) {
+				const Observer = uni.createIntersectionObserver(this)
+				const thresholds = 1
+				
+				Observer.relativeTo('.product-section', {
+					bottom: thresholds - this.viewportSize      // hack(直接设置成 -viewportSize不行，结果未知)
+				}).observe(`#products-${id}`, (res) => {
+					if (res.intersectionRatio > 0) {
+						
+						// debounce scroll linkage
+						if (this.scrollTimer) {
+							clearTimeout(this.scrollTimer)
+						}
+						this.scrollTimer = setTimeout(() => {
+							this._calculateScrollMenuTop(id)
+							this.currentCategoryId = id
+						}, 250)
+					}
 				})
 			},
 			pay() {
